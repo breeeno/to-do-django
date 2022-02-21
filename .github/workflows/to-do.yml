@@ -27,3 +27,7 @@ jobs:
       run: |
         pip install pipenv
         pipenv sync --dev
+
+    - name: Realizar testes
+      run: |
+        pipenv run pytest to_do
