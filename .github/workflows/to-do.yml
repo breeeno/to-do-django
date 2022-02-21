@@ -23,9 +23,7 @@ jobs:
       with:
         python-version: 3.9
 
-    - name: Install dependencies
+    - name: Instalar dependências
       run: |
-        python3 -m pip install --upgrade pip
-        pipenv sync -d
-        pipenv install --deploy --dev
-
+        pip install pipenv
+        pipenv sync --dev
