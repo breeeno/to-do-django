@@ -1,10 +1,9 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
-
 # Create your views here.
 from django.urls import reverse
-
 from to_do.tarefas.forms import TarefaNovaForm
+from to_do.tarefas.models import Tarefa
 
 
 def home(request):
@@ -14,5 +13,7 @@ def home(request):
             form.save()
             return HttpResponseRedirect(reverse('tarefas:home'))
         else:
-            return render(request, 'tarefas/home.html', {'form': form}, status=400)
-    return render(request, 'tarefas/home.html')
+            tarefas_pendentes = Tarefa.objects.filter(feita=False).all()
+            return render(request, 'tarefas/home.html', {'form': form, 'tarefas_pendentes': tarefas_pendentes}, status=400)
+    tarefas_pendentes = Tarefa.objects.filter(feita=False).all()
+    return render(request, 'tarefas/home.html', {'tarefas_pendentes': tarefas_pendentes})
