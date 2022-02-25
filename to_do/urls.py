@@ -18,9 +18,9 @@ from django.urls import path, include
 
 from to_do.home_view import home
 
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', home),
-    path('tarefas/', include('to_do.tarefas.urls'))
-
+    path('tarefas/', include('to_do.tarefas.urls')),
 ]
