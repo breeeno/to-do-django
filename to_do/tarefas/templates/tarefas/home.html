@@ -42,20 +42,37 @@
             </form>
 
             {% endfor %}
-        <h2 class="mt-5">Tarefas já concluidas</h2>
+            <h2 class="mt-5">Tarefas já concluidas</h2>
 
             {% for tarefa in tarefas_feitas %}
-
-            <form action="{% url 'tarefas:detalhe' tarefa_id=tarefa.id %}" method="post">
-                {% csrf_token %}
-                <div class="input-group mb-3">
-                    <input type="text" class="form-control" placeholder="Descreva sua tarefa" required="required"
-                           aria-label="descreva sua tarefa" name="nome" value="{{ tarefa.nome }}">
-                    <div class="input-group-append">
-                        <button class="btn-warning" type="submit">Marcar como pendente</button>
-                    </div>
+            <div class="row">
+                <div class="col-1">
+                    <form action="{% url 'tarefas:apagar' tarefa_id=tarefa.id %}" method="post">
+                        {% csrf_token %}
+                        <div class="input-group mb-3">
+                            <div class="input-group-append">
+                                <button class="btn-danger" type="submit">Apagar</button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
-            </form>
+
+                <div class="col-11">
+                    <form action="{% url 'tarefas:detalhe' tarefa_id=tarefa.id %}" method="post">
+                        {% csrf_token %}
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" placeholder="Descreva sua tarefa"
+                                   required="required"
+                                   aria-label="descreva sua tarefa" name="nome" value="{{ tarefa.nome }}">
+                            <div class="input-group-append">
+                                <button class="btn-warning" type="submit">Marcar como pendente</button>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+
 
             {% endfor %}
         </div>
